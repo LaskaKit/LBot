@@ -6,9 +6,9 @@
 <p><span>Napájení robota je zajištěno čtveřicí AA baterií v praktickém držáku se standardním kruhovým napájecím konektorem 5,5/2,1mm. Lze tedy robota napájet z různých zdrojů.</span></p>
 <p>LBot je dodáván s naším demo softwarem, díky kterému můžeš hned po sestavení jezdit pomocí infračerveného dálkového ovládání, nebo z mobilního telefonu přes Bluetooth a nikdy nenarazíš do žádné překážky, protože software sleduje ultrazvukovým čidlem překážky před sebou, v bezpečné vzdálenosti před překážkou zastaví a pro snadnější objetí překážky i kousek couvne. Další funkcí v&nbsp;tomto základním režimu je, že pokud klesne intenzita okolního osvětlení, rozsvítí obě tříbarevné LED diody bílou barvou a pokud zase intenzita stoupne, automaticky je zhasne.</p>
 <p>Tlačítkem na základní desce, nebo tlačítkem v&nbsp;aplikaci na mobilním telefonu/tabletu lze robota přepnout do režimu sledování čáry a LBot začne jezdit tvoji připravenou trasu. Opakovaným stiskem tlačítka na základní desce, nebo tlačítka v&nbsp;aplikaci na mobilním telefonu/tabletu se režim sledování čáry ukončí a LBot se vrátí do základního režimu.&nbsp;Stejnou funkci má i tlačítko 0 na infračerveném dálkovém ovladači.</p>
-<p><span style="font-size: 14pt;"><strong>Sleduje čáru</strong></span><img src="/user/documents/upload/untitled-5.jpg" alt="untitled-5" /></p>
+<p><span style="font-size: 14pt;"><strong>Sleduje čáru</strong></span><img src="https://github.com/LasKKit/LBot/blob/master/cara.jpg?raw=true" alt="untitled-5" /></p>
 <p><span style="font-size: 14pt;"><strong>Vyhýbá se překážkám</strong></span></p>
-<p><strong><img src="/user/documents/upload/untitled-4.jpg" alt="untitled-4" /></strong></p>
+<p><strong><img src="https://github.com/LasKKit/LBot/blob/master/ultrazvuk.jpg?raw=true" alt="untitled-4" /></strong></p>
 <p><span style="font-size: 14pt;"><strong>Ovládá se infračerveným dálkovým ovladačem</strong></span></p>
-<p><span style="font-size: 14pt;"><strong><img src="/user/documents/upload/untitled-2-2.jpg" alt="untitled-2-2" /></strong></span></p>
+<p><span style="font-size: 14pt;"><strong><img src="https://github.com/LasKKit/LBot/blob/master/ovladac.jpg?raw=true" alt="untitled-2-2" /></strong></span></p>
 <p><span style="font-size: 12pt;"><strong>Seznam komponent v sadě:</strong></span></p>
