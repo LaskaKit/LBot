@@ -11,4 +11,3 @@
 <p><strong><img src="https://github.com/LasKKit/LBot/blob/master/ultrazvuk.jpg?raw=true" alt="untitled-4" /></strong></p>
 <p><span style="font-size: 14pt;"><strong>Ovládá se infračerveným dálkovým ovladačem</strong></span></p>
 <p><span style="font-size: 14pt;"><strong><img src="https://github.com/LasKKit/LBot/blob/master/ovladac.jpg?raw=true" alt="untitled-2-2" /></strong></span></p>
-<p><span style="font-size: 12pt;"><strong>Seznam komponent v sadě:</strong></span></p>
