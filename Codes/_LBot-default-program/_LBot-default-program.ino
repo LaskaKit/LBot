@@ -1,9 +1,9 @@
-#include <IRremote.h>
+#include <IRremote.h> // v. 2.7.0
 #include <Adafruit_NeoPixel.h>
 #include <HCSR04.h>
 
-const unsigned int cidlo_L = 9;  // Leve cidlo sledovani cary na pinu 9
-const unsigned int cidlo_R = 10;  // Prave cidlo sledovani cary na pinu 10
+const unsigned int cidlo_L = 10;  // Leve cidlo sledovani cary na pinu 10
+const unsigned int cidlo_R = 9;  // Prave cidlo sledovani cary na pinu 9
 int tdelay = 70;  // Prodleva pri zataceni v rezimu sledovani cary
 bool sledovani_cary = false;  // Promenna, do ktere se bude ukladat zda je spusten rezim sledovani cary
 
@@ -163,7 +163,7 @@ void loop() {
       }
       return;
     }
-
+Serial.println(prijaty_kod.value);
     switch (prijaty_kod.value) {
       case 16712445:
         jedDopredu();
