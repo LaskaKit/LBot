@@ -1,3 +1,5 @@
+//LaskaKIT LBot factory default software v1.5
+
 #include <IRremote.h> // v. 2.7.0
 #include <Adafruit_NeoPixel.h>
 #include <HCSR04.h>
