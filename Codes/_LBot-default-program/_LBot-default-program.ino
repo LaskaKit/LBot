@@ -307,8 +307,8 @@ void jedDopredu() {
   korekce_R = 0;
   unsigned int rychlost_L = speed_L(rychlost);  // Nacteni a ulozeni do pomocne promenne udaj o rychlosti otaceni leveho kola
   unsigned int rychlost_R = speed_R(rychlost);  // Nacteni a ulozeni do pomocne promenne udaj o rychlosti otaceni praveho kola
-  digitalWrite(left, HIGH);  // Dir pin motoru A na log. 1
-  digitalWrite(right, HIGH);  // Dir pin motoru B na log. 1
+  digitalWrite(left, LOW);  // Dir pin motoru A na log. 1
+  digitalWrite(right, LOW);  // Dir pin motoru B na log. 1
   analogWrite(pwmLeft, rychlost_L);  // PWM motoru A na nastavenou rychlost
   analogWrite(pwmRight, rychlost_R);  // PWM motoru B na nastavenou rychlost
 }
@@ -319,8 +319,8 @@ void jedDozadu() {
   korekce_R = 0;
   unsigned int rychlost_L = speed_L(rychlost);  // Nacteni a ulozeni do pomocne promenne udaj o rychlosti otaceni leveho kola
   unsigned int rychlost_R = speed_R(rychlost);  // Nacteni a ulozeni do pomocne promenne udaj o rychlosti otaceni praveho kola
-  digitalWrite(left, LOW);  // Dir pin motoru A na log. 0
-  digitalWrite(right, LOW);  // Dir pin motoru B na log. 0
+  digitalWrite(left, HIGH);  // Dir pin motoru A na log. 0
+  digitalWrite(right, HIGH);  // Dir pin motoru B na log. 0
   analogWrite(pwmLeft, rychlost_L);  // PWM motoru A na nastavenou rychlost
   analogWrite(pwmRight, rychlost_R);  // PWM motoru B na nastavenou rychlost
 }
@@ -329,8 +329,8 @@ void jedDozadu() {
 void otocDoleva() {
   unsigned int rychlost_L = map(50, 0, 100, 0, speed_L(rychlost));  // Nacteni a ulozeni do pomocne promenne 50% rychlosti leveho kola
   unsigned int rychlost_R = speed_R(rychlost); // Nacteni a ulozeni do pomocne promenne udaj o rychlosti otaceni praveho kola
-  digitalWrite(left, LOW);  // Dir pin motoru A na log. 0
-  digitalWrite(right, HIGH);  // Dir pin motoru B na log. 1
+  digitalWrite(left, HIGH);  // Dir pin motoru A na log. 0
+  digitalWrite(right, LOW);  // Dir pin motoru B na log. 1
   analogWrite(pwmLeft, rychlost_L);  // PWM motoru A na nastavenou rychlost
   analogWrite(pwmRight, rychlost_R);  // PWM motoru B na nastavenou rychlost
 }
@@ -339,8 +339,8 @@ void otocDoleva() {
 void otocDoprava() {
   unsigned int rychlost_L = speed_L(rychlost);  // Nacteni a ulozeni do pomocne promenne udaj o rychlosti otaceni leveho kola
   unsigned int rychlost_R = map(50, 0, 100, 0, speed_R(rychlost));  // Nacteni a ulozeni do pomocne promenne 50% rychlosti praveho kola
-  digitalWrite(left, HIGH);  // Dir pin motoru A na log. 1
-  digitalWrite(right, LOW);  // Dir pin motoru B na log. 0
+  digitalWrite(left, LOW);  // Dir pin motoru A na log. 1
+  digitalWrite(right, HIGH);  // Dir pin motoru B na log. 0
   analogWrite(pwmLeft, rychlost_L);  // PWM motoru A na nastavenou rychlost
   analogWrite(pwmRight, rychlost_R);  // PWM motoru B na nastavenou rychlost
 }
