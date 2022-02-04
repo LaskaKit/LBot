@@ -151,8 +151,8 @@ void loop() {
     bt = false;  // Vypne rezim bluetooth
     
     if (prijaty_kod.value == 0xFFFFFFFF) prijaty_kod.value = kod;  // Pokud prichazi kod opakovane (pri delsim stisku tlacitka)
-    //Serial.print(prijaty_kod.value, DEC);  // Vypise kod na seriovou konzoli v ciselne(desitkove) soustave
-    //Serial.print(" - ");
+    Serial.print(prijaty_kod.value, DEC);  // Vypise kod na seriovou konzoli v ciselne(desitkove) soustave
+    Serial.print(" - ");
 
     if ((vzdalenost <= 10) && (prijaty_kod.value == 16712445)){  // Pokud je vzdalenost od prekazky mensi, nebo rovna 10cm a prichazi kod pro jizdu vpred
       motoryStop();  // Zastavi motory
@@ -169,19 +169,19 @@ Serial.println(prijaty_kod.value);
     switch (prijaty_kod.value) {
       case 16712445:
         jedDopredu();
-        //Serial.println("Jedu dopredu");
+        Serial.println("Jedu dopredu");
         break;
       case 16750695:
         jedDozadu();
-        //Serial.println("Jedu dozadu");
+        Serial.println("Jedu dozadu");
         break;
       case 16769055:
         otocDoleva();
-        //Serial.println("Jedu doleva");
+        Serial.println("Jedu doleva");
         break;
       case 16748655:
         otocDoprava();
-        //Serial.println("Jedu doprava");
+        Serial.println("Jedu doprava");
         break;
       case 16738455:
         if (!p){
@@ -193,7 +193,7 @@ Serial.println(prijaty_kod.value);
         }
         break;
       default:
-        //Serial.println("Neznamy kod");
+        Serial.println("Neznamy kod");
         break;
     }
 
