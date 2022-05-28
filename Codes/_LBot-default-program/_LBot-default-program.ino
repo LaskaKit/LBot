@@ -1,4 +1,4 @@
-//LaskaKIT LBot factory default software v1.5
+//LaskaKIT LBot factory default software v1.7
 
 #include <IRremote.h> // v. 2.7.0
 #include <Adafruit_NeoPixel.h>
@@ -6,7 +6,7 @@
 
 const unsigned int cidlo_L = 10;  // Leve cidlo sledovani cary na pinu 10
 const unsigned int cidlo_R = 9;  // Prave cidlo sledovani cary na pinu 9
-int tdelay = 70;  // Prodleva pri zataceni v rezimu sledovani cary
+int tdelay = 140;  // Prodleva pri zataceni v rezimu sledovani cary
 bool sledovani_cary = false;  // Promenna, do ktere se bude ukladat zda je spusten rezim sledovani cary
 
 bool bt = false;  // Promenna, do ktere se bude ukladat zda je aktivni ovladani pomoci bluetooth
@@ -85,22 +85,25 @@ void loop() {
   }
 
   if (sledovani_cary){  // Pokud byl zapnut rezim sledovani cary
-    rychlost = 70;  // Nastaveni rychlosti jizdy
+    //rychlost = 70;  // Nastaveni rychlosti jizdy
 
     bool s1 = !digitalRead(cidlo_L);  // Nacteni logicke urvone z leveho cidla sledovani cary a jeji negace
     bool s2 = !digitalRead(cidlo_R);  // Nacteni logicke urvone z praveho cidla sledovani cary a jeji negace
  
     if (s1 && s2) {  // Pokud je logicka hodnota na obou cidlech H(1)
+      rychlost = 70;
       jedDopredu(); 
       //Serial.println("Dopredu");
     } else if (!s1 && !s2) {  // Pokud je logicka hodnota na obou cidlech L(0)
       motoryStop(); 
       //Serial.println("Stop");
     } else if (s1 && !s2) {  // Pokud je logicka hodnota na levem cidle H(1) a na pravem cidle L(0)
+      rychlost = 90;
       otocDoprava(); 
       //Serial.println("Doprava");
       delay(tdelay);
     } else if (!s1 && s2) {  // Pokud je logicka hodnota na levem cidle L(0) a na pravem cidle H(1)
+      rychlost = 90;
       otocDoleva(); 
       //Serial.println("Doleva");
       delay(tdelay);
@@ -143,7 +146,8 @@ void loop() {
   rychlost = 150;
 
   vzdalenost = distanceSensor.measureDistanceCm();  // Zmereni a ulozeni do promenne hodnoty vzdalenosti ultrazvukovym cidlem. Hodnota vzdalenosti je v cm
-  if (vzdalenost < 0) vzdalenost = 0;  // Knihovna vraci -1, pokud je zmereny rozsah mimo pracovni oblasti cidla = < 0 a > 400cm
+  //if (vzdalenost < 0) vzdalenost = 0;  // Knihovna vraci -1, pokud je zmereny rozsah mimo pracovni oblasti cidla = < 0 a > 400cm
+  //Serial.print("Vzdalenost: ");
   //Serial.println(vzdalenost, 0);  
 
   if (irrecv.decode(&prijaty_kod)){  // Poku je prijaty kod
@@ -154,13 +158,13 @@ void loop() {
     Serial.print(prijaty_kod.value, DEC);  // Vypise kod na seriovou konzoli v ciselne(desitkove) soustave
     Serial.print(" - ");
 
-    if ((vzdalenost <= 10) && (prijaty_kod.value == 16712445)){  // Pokud je vzdalenost od prekazky mensi, nebo rovna 10cm a prichazi kod pro jizdu vpred
+    if (((vzdalenost <= 10) && (vzdalenost >= 0)) && (prijaty_kod.value == 16712445)){  // Pokud je vzdalenost od prekazky mensi, nebo rovna 10cm a prichazi kod pro jizdu vpred
       motoryStop();  // Zastavi motory
       delay(30);
-      rychlost = 50;  // Snizeni rychlosti
+      rychlost = 70;  // Snizeni rychlosti
       while (vzdalenost < 13){  // Bude couvat, dokud nebude vzdalenost od prekazky vetsi nez 12cm
         vzdalenost = distanceSensor.measureDistanceCm();  
-        if (vzdalenost < 0) vzdalenost = 0;
+        //if (vzdalenost < 0) vzdalenost = 0;
         jedDozadu();
       }
       return;
@@ -238,27 +242,28 @@ Serial.println(prijaty_kod.value);
     } 
   }
     
-  if ((vzdalenost <= 10) && bt){  // Pokud je vzdalenost od prekazky mensi, nebo rovna 10cm a je aktivni prikaz z bluetooth
+  if (((vzdalenost <= 10) && (vzdalenost >= 0)) && bt){  // Pokud je vzdalenost od prekazky mensi, nebo rovna 10cm a je aktivni prikaz z bluetooth
     bt = false;  // Vypne rezim bluetooth
     motoryStop();  // Zastavi motory
     delay(30);
-    rychlost = 50;  // Snizi rychlost
+    rychlost = 70;  // Snizi rychlost
     while (vzdalenost < 13){  // Bude couvat, dokud nebude vzdalenost od prekazky vetsi nez 12cm
       vzdalenost = distanceSensor.measureDistanceCm();  
-      if (vzdalenost < 0) vzdalenost = 0;
+      //if (vzdalenost < 0) vzdalenost = 0;
       jedDozadu();
     }
     motoryStop();
   }
 
   osvetleni = analogRead(svetelny_senzor);  // Nacteni hodnoty na analogovem pinu, kde je pripojen senzor. Hodnota v rozsahu 0 - 1024
+  //Serial.print("Osvetleni: ");
   //Serial.println(osvetleni);
   if (osvetleni < 500){  // Pokud je hodnota okolniho osvetleni mensi nez 500
     nastavBarvu(255, 255, 255, 1);  // Rozsviti prvni RGB LED bilou barvou
     nastavBarvu(255, 255, 255, 2);  // Rozsviti druhou RGB LED bilou barvou
   }else{
     nastavBarvu(0, 0, 0, 1);  // Zhasne prvni RGB LED
-    nastavBarvu(0, 0, 0, 2);  // Zhasne prvni RGB LED
+    nastavBarvu(0, 0, 0, 2);  // Zhasne druha RGB LED
   }
   delay(100);
   }
@@ -305,7 +310,7 @@ void motoryStop() {
 
 // Jizda dopredu
 void jedDopredu() {
-  korekce_L = 7;  // Korekce rychlosti leveho motoru 7% nastavene rychlosti
+  korekce_L = 1;  // Korekce rychlosti leveho motoru 7% nastavene rychlosti
   korekce_R = 0;
   unsigned int rychlost_L = speed_L(rychlost);  // Nacteni a ulozeni do pomocne promenne udaj o rychlosti otaceni leveho kola
   unsigned int rychlost_R = speed_R(rychlost);  // Nacteni a ulozeni do pomocne promenne udaj o rychlosti otaceni praveho kola
@@ -317,7 +322,7 @@ void jedDopredu() {
 
 // Jizda dozadu
 void jedDozadu() {
-  korekce_L = 2;  // Korekce rychlosti leveho motoru 2% nastavene rychlosti
+  korekce_L = 1;  // Korekce rychlosti leveho motoru 2% nastavene rychlosti
   korekce_R = 0;
   unsigned int rychlost_L = speed_L(rychlost);  // Nacteni a ulozeni do pomocne promenne udaj o rychlosti otaceni leveho kola
   unsigned int rychlost_R = speed_R(rychlost);  // Nacteni a ulozeni do pomocne promenne udaj o rychlosti otaceni praveho kola
